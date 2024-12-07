@@ -6,7 +6,6 @@ export const useProductStore = defineStore('product', {
         list: [{
           name: 'honda2',
           imageUrl: 'https://picsum.photos/id/76/200/300',
-          quantity: 10,
           about: 'testt',
           status: 'open',
           price: 100,
@@ -14,7 +13,6 @@ export const useProductStore = defineStore('product', {
         {
             name: 'toyota2',
             imageUrl: 'https://picsum.photos/id/77/200/300',
-            quantity: 10,
             about: 'testt',
             status: 'open',
             price: 100,
@@ -22,7 +20,6 @@ export const useProductStore = defineStore('product', {
           {
             name: 'nissan',
             imageUrl: 'https://picsum.photos/id/78/200/300',
-            quantity: 10,
             about: 'testt',
             status: 'open',
             price: 100,
