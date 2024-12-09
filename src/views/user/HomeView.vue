@@ -1,4 +1,5 @@
 <script setup>
+import { useRouter } from 'vue-router';
 import UserLayout from '@/layouts/UserLayout.vue';
 import { useProductStore } from '@/stores/user/product'
 import Product from '@/components/Product.vue'
@@ -6,10 +7,14 @@ import { useCartStore } from '@/stores/user/cart';
 
 const productStore = useProductStore()
 const cart = useCartStore()
+const router = useRouter()
 
 const addToCart = (product)=>{
     console.log('hello add to cart',product)
     cart.addToCart(product)
+    router.push({
+        name:'cart'
+    })
 }
 </script>
 <template>

@@ -2,6 +2,7 @@
 import UserLayout from '@/layouts/UserLayout.vue';
 import Close from '@/components/icons/Close.vue';
 import { useCartStore } from '@/stores/user/cart';
+import { RouterLink } from 'vue-router';
 
 const cart = useCartStore()
 
@@ -38,7 +39,7 @@ const changeQuantity = (event,index) =>{
                                     </div>
                                 </div>
                                 <div>
-                                    <select class="select select-bordered w-1/2" @change="changeQuantity($event,index)">
+                                    <select v-model="item.quantity" class="select select-bordered w-1/2" @change="changeQuantity($event,index)">
                                         <option v-for="quantity in [1, 2, 3, 4]">{{ quantity }}</option>
                                     </select>
                                 </div>
@@ -70,6 +71,12 @@ const changeQuantity = (event,index) =>{
                         <div>ราคารวมทั้งหมด</div>
                         <div>{{ cart.summaryPrice }}</div>
                     </div>
+                </div>
+                <div class="flex flex-row-reverse">
+                    <RouterLink :to="{name:'checkout'}" class="btn btn-outline">
+                        Checkout
+                    </RouterLink>
+                    
                 </div>
             </div>
         </div>
