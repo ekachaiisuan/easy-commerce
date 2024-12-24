@@ -42,6 +42,19 @@ onMounted(() => {
                     </div>
                 </div>
                 <div class="divider"></div>
+                <div class="flex justify-between">
+                    <div>ราคาสินค้าทั้งหมด</div>
+                    <div>{{ orderData.totalPrice }}</div>
+                </div>
+                <div class="flex justify-between">
+                    <div>ค่าส่ง</div>
+                    <div>0</div>
+                </div>
+                <div class="flex justify-between">
+                    <div>ราคารวมทั้งหมด</div>
+                    <div>{{ orderData.totalPrice }}</div>
+                </div>
+                <div class="divider"></div>
                 <div v-for="product in orderData.products" class="grid grid-cols-4 gap-2 mb-4 items-center">
                     <div>
                         <img class="w-full" :src="product.imageUrl">
@@ -56,6 +69,7 @@ onMounted(() => {
                         รวม : {{ product.price * product.quantity }}
                     </div>
                 </div>
+                <div class="divider">Thank you</div>
             </div>
         </div>
 
