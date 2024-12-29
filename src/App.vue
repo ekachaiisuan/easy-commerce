@@ -2,15 +2,30 @@
 import { onMounted } from 'vue';
 import { RouterView } from 'vue-router';
 import { useCartStore } from './stores/user/cart';
-const cart = useCartStore()
+import { useProductStore } from './stores/user/product';
+import { useEventStore } from './stores/event';
 
-onMounted(()=>{
+const cart = useCartStore()
+const productStore = useProductStore()
+const eventStore = useEventStore()
+
+onMounted(() => {
   cart.loadCart()
+  productStore.loadProducts()
+  eventStore.popupMessage('info', 'Start')
 })
 </script>
 
 <template>
-  <div>
+ 
+    <div v-if="eventStore.alert" class="toast">
+      <div class="alert" :class="`alert-${eventStore.data.status}`">
+        <span>{{ eventStore.data.message }}</span>
+      </div>
+    </div>
+
     <RouterView></RouterView>
-  </div>
+  
+
+
 </template>

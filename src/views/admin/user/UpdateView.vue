@@ -1,28 +1,53 @@
 <script setup>
 import AdminLayout from '@/layouts/AdminLayout.vue';
-
+import { ref,reactive,onMounted } from 'vue';
 import { useAdminUserStore } from '@/stores/admin/user';
-import { RouterLink } from 'vue-router';
-const AdminUser = useAdminUserStore()
+import { RouterLink,useRoute,useRouter} from 'vue-router';
+import { useEventStore } from '@/stores/event';
+const adminUser = useAdminUserStore()
+const eventStore = useEventStore()
 const formData = [
     {
         name: 'Name',
-        field: 'name',
+        field: 'fullname',
         type: 'input'
     },
     {
         name: 'Role',
         field: 'role',
         type: 'select',
-        datalist:['Admin','Modula','User']
+        datalist:['admin','modula','user']
     },
     {
         name: 'Status',
         field: 'status',
         type: 'select',
-        datalist:['Active','Inactive']
+        datalist:['active','inactive']
     }
 ]
+const userIndex = ref(-1)
+const userData = reactive({
+    fullname:'',
+    role:'',
+    status:''
+})
+const route = useRoute()
+const router = useRouter()
+const updateUser =()=>{
+    adminUser.updateUser(userIndex.value,userData)
+    eventStore.popupMessage('info','update')
+    router.push({
+        name:'admin-user-list'
+    })
+}
+onMounted(()=>{
+    if(route.params.id){
+        userIndex.value = parseInt(route.params.id)
+        const selectedUser = adminUser.getUser(userIndex.value)
+        Object.assign(userData,selectedUser)
+    }
+})
+
 </script>
 <template>
     <AdminLayout>
@@ -34,10 +59,10 @@ const formData = [
                         <span class="label-text">{{ item.name }}</span>
                     </div>
                     <div v-if="item.type === 'input'">
-                        <input type="text" class="input input-bordered w-full " />
+                        <input v-model="userData[item.field]" type="text" class="input input-bordered w-full " />
                     </div>
                     <div v-else>
-                        <select class="select select-bordered w-full">
+                        <select v-model="userData[item.field]" class="select select-bordered w-full">
                             <option v-for="list in item.datalist">{{ list }}</option>
                         </select>
                     </div>
@@ -46,7 +71,7 @@ const formData = [
             </div>
             <div class="flex justify-end mt-4 gap-2">
                 <RouterLink :to="{ name: 'admin-user-list' }" class="btn btn-neutral">Back</RouterLink>
-                <button class="btn btn-neutral" @click="updateProduct">update</button>
+                <button class="btn btn-neutral" @click="updateUser">update</button>
             </div>
 
         </div>

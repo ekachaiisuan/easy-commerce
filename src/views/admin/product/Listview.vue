@@ -43,7 +43,7 @@ onMounted(() => {
         <Table :headers="dataheader">
             <tr v-for="(item, index) in adminProduct.list">
                 <th>{{ item.name }}</th>
-                <td><img :src="item.image" class="w-12"></td>
+                <td><img :src="item.imageUrl" class="w-12"></td>
                 <td>{{ item.price }}</td>
                 <td>{{ item.remainQuantity }}/{{ item.quantity }}</td>
                 <td>

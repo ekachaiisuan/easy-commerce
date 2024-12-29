@@ -41,7 +41,7 @@ export const useAdminProductStore = defineStore('admin-product', {
     },
     updateProduct(index, productData) {
       this.list[index].name = productData.name;
-      this.list[index].image = productData.image;
+      this.list[index].imageUrl = productData.imageUrl;
       this.list[index].price = productData.price;
       this.list[index].quantity = productData.quantity;
       this.list[index].remainQuantity = productData.remainQuantity;

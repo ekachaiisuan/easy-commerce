@@ -17,7 +17,7 @@ const formData = [
     },
     {
         name: 'Image',
-        field: 'image'
+        field: 'imageUrl'
     },
     {
         name: 'Price',
@@ -36,7 +36,7 @@ const formData = [
 
 const productData = reactive({
     name: '',
-    image: '',
+    imageUrl: '',
     price: 0,
     quantity: 0,
     about: '',
